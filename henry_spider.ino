@@ -71,6 +71,8 @@ if(dataInput == 'f')  sitJump();
 if(dataInput == 'g')  dancePUP();
 if(dataInput == 'r')  turnRight();
 if(dataInput == 'l')  turnLeft();
+if(dataInput == 't')  test();
+if(dataInput == 's')  sleep();
 
 
 
@@ -84,8 +86,27 @@ if(dataInput == 'l')  turnLeft();
 //delay(2000);
 //getDistance();
 //walkForward();
+//test();
+//delay(2000);
+//homePos();
+//delay(2000);
 
 } 
+
+
+
+void test()
+{
+  neckLR.write(50);
+  sit();
+  
+  FL_HIP.write(120);
+  BL_HIP.write(150);
+  FL_FOOT.write(220);
+//  FR_HIP.write(10); 
+  
+//  neckUD.write(50);
+}
 
 void lookRight()
 {
@@ -203,7 +224,7 @@ void sayHelloL()
 }
 void sit()
 {
-  homePos();
+//  homePos();
   FR_HIP.write(40);
   BR_HIP.write(80);
   FL_HIP.write(130);
