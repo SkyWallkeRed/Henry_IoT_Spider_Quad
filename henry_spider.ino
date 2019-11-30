@@ -19,12 +19,23 @@ Servo neckUD;
 
 const int trigPin = 13; // Trig Pin of Ultrasonic Sensor
 const int echoPin = 12; // Echo Pin of Ultrasonic Sensor
+const int lightSensorFrontPin = A5; // Light analog sensor 
+const int lightSensorMidPin = A4; // Light analog sensor 
+const int lightSensorBackPin = A3; // Light analog sensor 
+
+int frontSensorValue = 0;
+int midSensorValue = 0;
+int backSensorValue = 0;
+
+int scerdFront = 0;
+int scerdMid = 0;
+int scerdBack = 0;
 
 char dataInput = 0;     //Variable for storing received data
 
 void setup() { 
   Serial.begin(9600);    
-    
+ 
   FL_HIP.attach(4); 
   FL_FOOT.attach(5);
   FR_HIP.attach(6);
@@ -77,6 +88,53 @@ if(dataInput == 's')  sleep();
 
 
 }
+frontSensorValue = analogRead(lightSensorFrontPin); // read the value from the sensor
+midSensorValue = analogRead(lightSensorMidPin); // read the value from the sensor
+backSensorValue = analogRead(lightSensorBackPin); // read the value from the sensor
+
+    
+    Serial.println("");
+    Serial.print("scerd back: ");
+    Serial.print(backSensorValue);
+    Serial.print(" . ");
+    Serial.print("scerdFront: ");
+    Serial.print(frontSensorValue);
+    Serial.print(" . ");
+    Serial.print(" . ");
+    Serial.print("scerdTop: ");
+    Serial.print(midSensorValue);
+    Serial.println(" . ");
+    
+ if(midSensorValue < 25)
+  {
+    sleep();
+  }   
+ if(backSensorValue < 25)
+  {
+    Serial.println("scerd back: ");
+    Serial.println(backSensorValue);
+    walkForward();
+    delay(100);
+    homePos();
+  }
+if(frontSensorValue < 25)
+{
+ 
+  scared();  
+  scerdFront ++;
+  Serial.println("scerdFront: ");
+  Serial.println(scerdFront);
+
+  if(scerdFront > 1) aggression();
+//  return;
+//  if(scerdFront > 2) 
+//  scared();
+//  aggression();
+//  delay(100);
+//  homePos();
+}
+
+//delay(100);
 ////turnLeft();
 //turnLeft();
 //delay(2000);
@@ -90,9 +148,41 @@ if(dataInput == 's')  sleep();
 //delay(2000);
 //homePos();
 //delay(2000);
-
+//scared();
+//delay(2000);
 } 
 
+void aggression()
+{
+  scan();
+  neckLR.write(180);
+  neckUD.write(90);
+  givRight();
+  delay(50);
+//  bendBack();
+  homePos();
+  scerdFront = 0;
+}
+
+void scared()
+{
+//FR_HIP.write(10);
+//delay(1000);
+//FR_HIP.write(180);
+//delay(1000);
+//FR_HIP.write(10);
+//delay(1000);
+//FR_HIP.write(180);
+neckLR.write(120);
+FR_FOOT.write(130);  
+FL_FOOT.write(130);
+neckUD.write(80);
+delay(100);
+neckUD.write(130);
+delay(100);
+neckUD.write(80);
+homePos();
+}
 
 
 void test()
@@ -126,11 +216,11 @@ void lookLeft()
 void scan()
 {
   neckLR.write(140);
-  delay(200);
+  delay(150);
   neckUD.write(30);
-  delay(500);
+  delay(150);
   neckUD.write(150);
-  delay(300);
+  delay(150);
 //  neckLR.write(160);
 }
 
@@ -154,6 +244,7 @@ void sleep()
   BR_FOOT.write(170);
   BL_FOOT.write(150);
   BL_HIP.write(130);
+  neckLR.write(120);
 }
 
 void givRight()
@@ -320,6 +411,7 @@ void leanLeft()
 
 void homePos()
 {
+  delay(100);
   homePosHead();
  FL_HIP.write(80);
  FL_FOOT.write(110);
