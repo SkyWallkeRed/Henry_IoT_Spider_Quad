@@ -12,7 +12,7 @@
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
-
+#define iRsensorePin A6
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 // olen end ----------------------
@@ -36,6 +36,9 @@ const int echoPin = 12; // Echo Pin of Ultrasonic Sensor
 const int lightSensorFrontPin = A5; // Light analog sensor
 const int lightSensorMidPin = A4; // Light analog sensor
 const int lightSensorBackPin = A3; // Light analog sensor
+
+
+int armIRsensoreValue = 0;
 
 int frontSensorValue = 0;
 int midSensorValue = 0;
@@ -70,6 +73,7 @@ void setup() {
   neckLR.attach(3);
   neckUD.attach(2);
 
+  pinMode(iRsensorePin, INPUT);
 
   homePos();
   homePosHead();
@@ -90,9 +94,19 @@ void loop()
   midSensorValue = analogRead(lightSensorMidPin); // read the value from the sensor
   backSensorValue = analogRead(lightSensorBackPin); // read the value from the sensor
 
+  armIRsensoreValue = analogRead(iRsensorePin); // read the value from the sensor
+
   proximity_listener_init();
   print_back_sensore();
 
+  Serial.print(armIRsensoreValue);
+
+  if (armIRsensoreValue < 150) {
+    givRight();
+    delay(500);
+  } else {
+    homePos();
+  }
 
   //delay(100);
   ////turnLeft();
