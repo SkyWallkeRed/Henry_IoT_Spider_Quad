@@ -13,6 +13,8 @@
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define iRsensorePin A6
+#define iRsensoreHeadPin A9
+
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 // olen end ----------------------
@@ -36,9 +38,14 @@ const int echoPin = 12; // Echo Pin of Ultrasonic Sensor
 const int lightSensorFrontPin = A5; // Light analog sensor
 const int lightSensorMidPin = A4; // Light analog sensor
 const int lightSensorBackPin = A3; // Light analog sensor
+const int soundModulePin = A8; // Trig Pin of Ultrasonic Sensor
 
 
 int armIRsensoreValue = 0;
+int soundModuleSensoreValue = 0;
+
+
+int headIRsensoreValue = 0;
 
 int frontSensorValue = 0;
 int midSensorValue = 0;
@@ -74,9 +81,12 @@ void setup() {
   neckUD.attach(2);
 
   pinMode(iRsensorePin, INPUT);
+  pinMode(iRsensoreHeadPin, INPUT);
+  pinMode(soundModulePin, INPUT);
 
-  homePos();
-  homePosHead();
+
+  //  homePos();
+  //  homePosHead();
   //   sleep();
   delay(500);
 }
@@ -86,27 +96,28 @@ void setup() {
 void loop()
 {
 
-  seria_blutooth_listener_init();
-  //  oled_sctoll_init();
+
 
 
   frontSensorValue = analogRead(lightSensorFrontPin); // read the value from the sensor
   midSensorValue = analogRead(lightSensorMidPin); // read the value from the sensor
   backSensorValue = analogRead(lightSensorBackPin); // read the value from the sensor
-
   armIRsensoreValue = analogRead(iRsensorePin); // read the value from the sensor
+  headIRsensoreValue = analogRead(iRsensoreHeadPin); // read the value from the sensor
+  soundModuleSensoreValue = digitalRead(soundModulePin); // read the value from the sensor
 
+  seria_blutooth_listener_init();
+  //    oled_sctoll_init();
   proximity_listener_init();
   print_back_sensore();
-
-  Serial.print(armIRsensoreValue);
-
-  if (armIRsensoreValue < 150) {
-    givRight();
-    delay(500);
-  } else {
-    homePos();
-  }
+  initArmIRsensore();
+  initHeadIRsendore();
+  initSoundModuleListener();
+  //  Serial.println("soundModuleSensoreValue: ");
+  //  Serial.print(soundModuleSensoreValue);
+  Serial.println("--------------------------------");
+  Serial.println("headIRsensoreValue: ");
+  Serial.print(headIRsensoreValue);
 
   //delay(100);
   ////turnLeft();

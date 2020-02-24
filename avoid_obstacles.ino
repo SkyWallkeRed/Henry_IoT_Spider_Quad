@@ -1,7 +1,3 @@
-
-
-
-
 void avoidObstacles()
 {
   printToOled("avoid obls..");

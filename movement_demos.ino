@@ -3,13 +3,13 @@ void headDemo()
 {
   printToOled("head demo");
   grabHorizontalFront();
-  delay(700);
+//  delay(150);
   releaseHorizontalBack();
-  delay(700);
+//  delay(150);
   grabVerticalFront();
-  delay(700);
+//  delay(150);
   releaseVerticalBack();
-  delay(700);
+//  delay(150);
 }
 
 void leanDemo()

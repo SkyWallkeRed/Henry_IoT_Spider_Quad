@@ -2,7 +2,7 @@
 
 void proximity_listener_init() {
 
-  if (midSensorValue < 20)
+  if (midSensorValue < 30)
   {
     printToOled("mid sensore");
 
@@ -14,28 +14,32 @@ void proximity_listener_init() {
       return;
 
     } else {
+      printToOled("home pos");
       homePos();
       sleepStat = false;
     }
 
 
   }
-  if (backSensorValue < 25)
+  if (backSensorValue < 30)
   {
     printToOled("back sensore");
     Serial.println("scerd back: ");
     Serial.println(backSensorValue);
+    printToOled("wallk forward");
     walkForward();
     delay(100);
+    printToOled("home pos");
     homePos();
   }
-  if (frontSensorValue < 20)
+  if (frontSensorValue < 30)
   {
     if (sleepStat = false) {
       delay(500);
 
 
     } else {
+      printToOled("home pos");
       //        homePos();
       sleepStat = false;
 
@@ -57,6 +61,22 @@ void proximity_listener_init() {
     //  aggression();
     //  delay(100);
     //  homePos();
+  }
+}
+
+void initArmIRsensore() {
+  if (armIRsensoreValue < 150) {
+    givRight();
+    delay(500);
+  } else {
+    homePos();
+  }
+}
+
+void initHeadIRsendore() {
+  if (headIRsensoreValue < 150) {
+    sleep();
+    delay(2000);
   }
 }
 
