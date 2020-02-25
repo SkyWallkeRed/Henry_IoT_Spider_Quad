@@ -14,8 +14,7 @@ void aggression()
 
 void scared()
 {
-  printToOled("scared");
-
+  draw_warn();
   //FR_HIP.write(10);
   //delay(1000);
   //FR_HIP.write(180);
@@ -82,15 +81,13 @@ void wave()
 
 void sleep()
 {
-  printToOled("sleep");
-  printSleep();
+  draw_sleep();
   FR_FOOT.write(150);
   FL_FOOT.write(150);
   BR_FOOT.write(170);
   BL_FOOT.write(150);
   BL_HIP.write(130);
   neckLR.write(120);
-  printSleep();
   delay(100);
 }
 
@@ -136,7 +133,6 @@ void sayHelloL()
 }
 void sit()
 {
-  printToOled("sit");
   //  homePos();
   FR_HIP.write(40);
   BR_HIP.write(80);
@@ -175,7 +171,6 @@ void leanLeft()
 
 void bow()
 {
-  printToOled("bow");
   FL_FOOT.write(140);
   FR_FOOT.write(15);
   BL_FOOT.write(130);
@@ -184,7 +179,6 @@ void bow()
 
 void bendBack()
 {
-  printToOled("bend back");
   FL_FOOT.write(30);
   FR_FOOT.write(130);
   BL_FOOT.write(15);
@@ -203,7 +197,6 @@ long microsecondsToCentimeters(long microseconds) {
 void grabHorizontalFront()
 {
   bow();
-
   neckLR.write(170);
   neckUD.write(130);
   delay(700);
@@ -213,7 +206,6 @@ void grabHorizontalFront()
 void grabVerticalFront()
 {
   bow();
-
   neckLR.write(170);
   neckUD.write(130);
   delay(700);

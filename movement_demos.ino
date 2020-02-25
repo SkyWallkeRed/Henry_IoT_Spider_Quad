@@ -1,7 +1,7 @@
 
 void headDemo()
 {
-  printToOled("head demo");
+  draw_dance();
   grabHorizontalFront();
 //  delay(150);
   releaseHorizontalBack();
@@ -14,7 +14,6 @@ void headDemo()
 
 void leanDemo()
 {
-  printToOled("lean demo");
   leanLeft();
   delay(1000);
   homePos();

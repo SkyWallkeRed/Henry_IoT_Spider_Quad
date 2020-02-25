@@ -40,7 +40,7 @@ const int lightSensorMidPin = A4; // Light analog sensor
 const int lightSensorBackPin = A3; // Light analog sensor
 const int soundModulePin = A8; // Trig Pin of Ultrasonic Sensor
 
-
+float internalVolteg = 0;
 int armIRsensoreValue = 0;
 int soundModuleSensoreValue = 0;
 
@@ -61,7 +61,6 @@ void setup() {
 
   Serial.begin(9600);
   oled_init();
-  //draw_bitmap_image();
 
   // save I2C bitrate
   uint8_t twbrbackup = TWBR;
@@ -85,8 +84,8 @@ void setup() {
   pinMode(soundModulePin, INPUT);
 
 
-  //  homePos();
-  //  homePosHead();
+  homePos();
+  homePosHead();
   //   sleep();
   delay(500);
 }
@@ -95,29 +94,47 @@ void setup() {
 
 void loop()
 {
-
-
-
-
   frontSensorValue = analogRead(lightSensorFrontPin); // read the value from the sensor
   midSensorValue = analogRead(lightSensorMidPin); // read the value from the sensor
   backSensorValue = analogRead(lightSensorBackPin); // read the value from the sensor
   armIRsensoreValue = analogRead(iRsensorePin); // read the value from the sensor
   headIRsensoreValue = analogRead(iRsensoreHeadPin); // read the value from the sensor
   soundModuleSensoreValue = digitalRead(soundModulePin); // read the value from the sensor
-
+  internalVolteg = readVcc();
   seria_blutooth_listener_init();
-  //    oled_sctoll_init();
-  proximity_listener_init();
-  print_back_sensore();
-  initArmIRsensore();
+
+
+  draw_loading();
+  delay(200);
+  draw_warn();
+  delay(200);
+  draw_warn();
+  delay(200);
+  draw_dance();
+  delay(200);
+  draw_ok();
+  delay(200);
+  draw_ready();
+  delay(200);
+  draw_question();
+  delay(200);
+  draw_sleep();
+  delay(200);
+  draw_squirrel();
+  delay(200);
+  Serial.println(internalVolteg);
+  //  oled_sctoll_init();
+  //  proximity_listener_init();
+  //  print_back_sensore();
+  //  initArmIRsensore();
   initHeadIRsendore();
-  initSoundModuleListener();
+  //  initSoundModuleListener();
+
   //  Serial.println("soundModuleSensoreValue: ");
   //  Serial.print(soundModuleSensoreValue);
-  Serial.println("--------------------------------");
-  Serial.println("headIRsensoreValue: ");
-  Serial.print(headIRsensoreValue);
+  //  Serial.println("--------------------------------");
+  //  Serial.println("headIRsensoreValue: ");
+  //  Serial.print(headIRsensoreValue);
 
   //delay(100);
   ////turnLeft();
@@ -137,7 +154,18 @@ void loop()
   //delay(2000);
   //avoidObstacles();
 }
-
+long readVcc() {
+  //  long result;
+  //  // Read 1.1V reference against AVcc
+  //  ADMUX = _BV(REFS0) | _BV(MUX3) | _BV(MUX2) | _BV(MUX1);
+  //  delay(2); // Wait for Vref to settle
+  //  ADCSRA |= _BV(ADSC); // Convert
+  //  while (bit_is_set(ADCSRA,ADSC));
+  //  result = ADCL;
+  //  result |= ADCH<<8;
+  //  result = 1126400L / result; // Back-calculate AVcc in mV
+  //  return result;
+}
 
 void test()
 {

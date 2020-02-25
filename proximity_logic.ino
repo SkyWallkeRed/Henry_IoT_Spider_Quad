@@ -19,7 +19,6 @@ void proximity_listener_init() {
       sleepStat = false;
     }
 
-
   }
   if (backSensorValue < 30)
   {

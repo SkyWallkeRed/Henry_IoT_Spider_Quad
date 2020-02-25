@@ -9,7 +9,7 @@ void homePosHead()
 
 void homePos()
 {
-  printToOled("home pos");
+  draw_ready();
   delay(100);
   homePosHead();
   FL_HIP.write(80);
