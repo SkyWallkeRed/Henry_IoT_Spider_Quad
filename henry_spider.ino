@@ -4,7 +4,6 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 #include <Servo.h>
-// oled start -----------------
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -55,6 +54,10 @@ int scerdFront = 0;
 int scerdMid = 0;
 int scerdBack = 0;
 
+const int redPin = 48;
+const int greenPin = 50;
+const int bluePin = 52;
+
 char dataInput = 0;     //Variable for storing received data
 
 void setup() {
@@ -83,11 +86,8 @@ void setup() {
   pinMode(iRsensoreHeadPin, INPUT);
   pinMode(soundModulePin, INPUT);
 
-
   homePos();
   homePosHead();
-  //   sleep();
-  delay(500);
 }
 
 
@@ -101,33 +101,25 @@ void loop()
   headIRsensoreValue = analogRead(iRsensoreHeadPin); // read the value from the sensor
   soundModuleSensoreValue = digitalRead(soundModulePin); // read the value from the sensor
   internalVolteg = readVcc();
+
   seria_blutooth_listener_init();
 
+  //  draw_all();
 
-  draw_loading();
-  delay(200);
-  draw_warn();
-  delay(200);
-  draw_warn();
-  delay(200);
-  draw_dance();
-  delay(200);
-  draw_ok();
-  delay(200);
-  draw_ready();
-  delay(200);
-  draw_question();
-  delay(200);
-  draw_sleep();
-  delay(200);
-  draw_squirrel();
-  delay(200);
   Serial.println(internalVolteg);
-  //  oled_sctoll_init();
+  //    oled_sctoll_init();
   //  proximity_listener_init();
   //  print_back_sensore();
-  //  initArmIRsensore();
+  initArmIRsensore();
   initHeadIRsendore();
+//  light_red();
+//  delay(300);
+//  light_pink();
+//  delay(300);
+  light_teal();
+//  delay(300);
+//  light_yellow();
+//  delay(300);
   //  initSoundModuleListener();
 
   //  Serial.println("soundModuleSensoreValue: ");

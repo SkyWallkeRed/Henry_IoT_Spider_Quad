@@ -93,7 +93,7 @@ void sleep()
 
 void givRight()
 {
-  printToOled("give right");
+  draw_fist();
   FL_HIP.write(90);
   BR_HIP.write(10);
   FR_FOOT.write(170);
@@ -133,7 +133,7 @@ void sayHelloL()
 }
 void sit()
 {
-  //  homePos();
+  draw_sit();
   FR_HIP.write(40);
   BR_HIP.write(80);
   FL_HIP.write(130);

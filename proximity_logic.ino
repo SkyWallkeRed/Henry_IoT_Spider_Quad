@@ -66,7 +66,7 @@ void proximity_listener_init() {
 void initArmIRsensore() {
   if (armIRsensoreValue < 150) {
     givRight();
-    delay(500);
+    delay(700);
   } else {
     homePos();
   }
