@@ -5,6 +5,7 @@
 * sit 
 * move forward and back
 * turn right and left
+* avoid obstacles
 * dance
 * "give a hand"
 * and some really cute moves ! 
@@ -13,10 +14,17 @@
 * RGB
 * IR
 * ultra sonic
+* BLE
 
 #### need to know before:
 * how to google !
 * arduino 
 * servo
+* BLE
 * wireing
 * soldering
+
+
+#### code is in diffrent files, henry_spider.ino is your main one
+
+#### most functions are off on init edit henry_spider.ino loop() to activate.
