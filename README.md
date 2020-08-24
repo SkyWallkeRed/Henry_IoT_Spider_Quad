@@ -27,4 +27,4 @@
 
 #### code is in diffrent files, henry_spider.ino is your main one
 
-#### most functions are off on init edit henry_spider.ino loop() to activate.
+#### most functions are off. edit henry_spider.ino loop() to activate.
