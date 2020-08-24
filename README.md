@@ -18,6 +18,7 @@
 
 #### need to know before:
 * how to google !
+* basic C
 * arduino 
 * servo
 * BLE
